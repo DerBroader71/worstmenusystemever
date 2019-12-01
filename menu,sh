@@ -3,6 +3,7 @@
 
 # remove the old exec.sh
 rm -f ~/exec.sh
+
 # run php script to show menu
 /usr/bin/php ~/menu.php
 
