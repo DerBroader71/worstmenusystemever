@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 // read the .ssh/config file
 $filedata = file('.ssh/config');
 
-// sort out the data
+// clean up the data
 $filedata = array_map('trim', $filedata);
 $filedata = array_filter($filedata);
 
@@ -27,31 +27,32 @@ $menudata = array_values($menu);
 
 // drop the filedata array
 unset($filedata);
-$menu = array();
 
 // generate the menu
-
+$menu = array();
 foreach($menudata as $menuitem) {
         array_push($menu, array($menuitem["name"] => $menuitem["name"].' - '.$menuitem["desc"]));
 }
 array_push($menu, array('quit' => 'Quit to shell'));
 
+// and then flatten it to a single dimension
 $menu = flatten($menu);
 
+// show the menu
 while (true) {
         $choice = \cli\menu($menu, null, 'Choose a host');
         \cli\line();
         if ($choice == 'quit') {
-                $execfile = './exec.sh';
-                file_put_contents($execfile, "exit");
-                break;
+            $execfile = './exec.sh';
+            file_put_contents($execfile, "exit");
+            break;
         }
         $execfile = './exec.sh';
         file_put_contents($execfile, "/usr/bin/ssh ${choice}");
         exit();
-        //\cli\line();
 }
 
+// a function to flatten an array to a single dimension
 function flatten($array, $prefix = '') {
     $result = array();
     foreach($array as $key=>$value) {
