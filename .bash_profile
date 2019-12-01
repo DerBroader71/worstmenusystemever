@@ -10,4 +10,6 @@ fi
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 export PATH
+
+# Add the line below to get the menu script invoked
 ~/menu.sh
