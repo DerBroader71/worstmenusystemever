@@ -10,5 +10,4 @@ fi
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 export PATH
-rm ~/exec.sh
 ~/menu.sh
